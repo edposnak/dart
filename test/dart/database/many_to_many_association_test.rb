@@ -1,21 +1,13 @@
 require_relative '../../test_helper'
-require_relative '../../../lib/dart/naming_conventions'
+require_relative '../../../lib/dart/database'
+require_relative '../../../lib/dart/database/test_helpers'
+require_relative '../../../lib/dart/reflection/sequel/naming_conventions' # install Sequel naming conventions
 
 module Dart
-  module NamingConventions
+  module Database
     class ManyToManyAssociationTest < Minitest::Test
 
-      # TODO DRY these helpers with other tests, move to test_helper.rb
-      def many_to_one_ass(child_table, foreign_key, parent_table, primary_key)
-        Dart::NamingConventions::ManyToOneAssociation.new(child_table:  child_table,
-                                                          foreign_key:  foreign_key,
-                                                          parent_table: parent_table,
-                                                          primary_key:  primary_key)
-      end
-
-      def many_to_many_ass(ass_to_me, ass_to_other)
-        Dart::NamingConventions::ManyToManyAssociation.new ass_to_me, ass_to_other
-      end
+      include Dart::Database::TestHelpers
 
       ##############################################################################################################
       # describe #disambiguate_name!

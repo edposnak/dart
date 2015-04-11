@@ -60,7 +60,6 @@ module Dart
                       end
 
 
-          # "\nThe following tables were searched\n:#{db_tables}"
           schema = Schema.new(db, db_tables)
           create_direct_associations!(schema, fk_finder)
           schema
@@ -72,11 +71,8 @@ module Dart
 
             foreign_keys.each do |foreign_key|
               if one_relation = schema.relation(foreign_key.parent_table)
-                many_to_one_ass = NamingConventions::ManyToOneAssociation.new(foreign_key)
-                relation.add_association many_to_one_ass
-
-                one_to_many_ass = NamingConventions::OneToManyAssociation.new(foreign_key)
-                one_relation.add_association one_to_many_ass
+                relation.add_many_to_one foreign_key
+                one_relation.add_one_to_many foreign_key
               else
                 fail "schema does not contain a table named '#{foreign_key.parent_table}'. Perhaps it was excluded accidentally?"
               end
@@ -131,12 +127,8 @@ module Dart
               # e.g do users many_to_many groups if users has reporting_group_id (many_to_one reporting_group, and many_to_many groups)
               next if r1.has_direct_conventional_parent?(r2.table_name) || r2.has_direct_conventional_parent?(r1.table_name)
 
-              many_to_many_ass1 = NamingConventions::ManyToManyAssociation.new(ass1, ass2)
-              r1.add_association many_to_many_ass1
-
-              many_to_many_ass2 = NamingConventions::ManyToManyAssociation.new(ass2, ass1)
-              many_to_many_ass2.set_conventional_name!
-              r2.add_association many_to_many_ass2
+              r1.add_many_to_many ass1, ass2
+              r2.add_many_to_many ass2, ass1
             end
           end
 

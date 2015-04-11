@@ -14,7 +14,7 @@ module Dart
 
           # default to using all tables unless db_tables is passed in
           table_names   = (db_tables || db.tables).map(&method(:sequelize))
-          @relation_map = Hash[table_names.map { |table| [table, Relation.new(table, db[table].columns)] }]
+          @relation_map = Hash[table_names.map { |table| [table, Database::Relation.new(table, db[table].columns)] }]
         end
 
         def execute!(sql)

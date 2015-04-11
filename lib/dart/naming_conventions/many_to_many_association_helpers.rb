@@ -1,12 +1,7 @@
 module Dart
   module NamingConventions
-    class ManyToManyAssociation < Dart::ManyToManyAssociation
+    module ManyToManyAssociationHelpers
       include AssociationHelpers
-
-      def initialize(*)
-        super
-        set_conventional_name!
-      end
 
       # Returns the name of a referenced association according to the naming convention
       #

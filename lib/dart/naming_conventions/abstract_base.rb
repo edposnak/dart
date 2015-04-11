@@ -4,17 +4,8 @@ module Dart
     PUBLIC_API_METHODS = [:parent_table_for, :singular_association_name, :plural_association_name, :long_association_name, :conventional_join_table_names]
 
     class AbstractBase
-      include Singleton
-
+      abstract_method :conventional_primary_key, :foreign_key_regex
       abstract_method :pluralize, :singularize
-
-      attr_reader :conventional_primary_key, :foreign_key_regex
-
-      # @param [Hash] attrs
-      def configure(attrs)
-        @conventional_primary_key = attrs[:conventional_primary_key]
-        @foreign_key_regex = attrs[:foreign_key_regex]
-      end
 
       # Returns the name of a possibly referenced table if the given possible_foreign_key follows the naming convention,
       # otherwise returns nil

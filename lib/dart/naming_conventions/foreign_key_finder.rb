@@ -9,7 +9,7 @@ module Dart
       # @param [Schema] schema defines the set of referenceable tables
       #
       def foreign_keys_for(relation, schema)
-        naming_conventions = Dart::NamingConventions::AbstractBase.instance
+        naming_conventions = Dart::NamingConventions.instance
         relation.column_names.map do |possible_foreign_key|
           if parent_table = naming_conventions.parent_table_for(possible_foreign_key)
             if schema.has_table?(parent_table)
