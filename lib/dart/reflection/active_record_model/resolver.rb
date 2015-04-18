@@ -7,7 +7,7 @@ module Dart
           # if where_values = this_model_class.where(nil).where_values ...
           # Since the above doesn't work the same in Rails3 and Rails4, we'll use the more opaque to_sql.split('WHERE')
 
-          select_sql, where_sql = this_model_class.where(nil).to_sql.split('WHERE')
+          _, where_sql = this_model_class.where(nil).to_sql.split('WHERE')
           where_sql && where_sql.strip
         end
 

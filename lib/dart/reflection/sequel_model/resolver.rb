@@ -30,18 +30,18 @@ module Dart
           associated_model_class = Module.const_get(ass_reflection[:class_name])
 
           ass = case ass_reflection[:type]
-                when :many_to_many
+                when Association::MANY_TO_MANY_TYPE
                   left_ass  = ManyToOneAssociation.new(child_table:  ass_reflection[:join_table], foreign_key: ass_reflection[:left_key],
                                                        parent_table: this_model_class.table_name, primary_key: ass_reflection[:left_primary_key])
                   right_ass = ManyToOneAssociation.new(child_table:  ass_reflection[:join_table], foreign_key: ass_reflection[:right_key],
                                                        parent_table: ass_reflection.associated_dataset.first_source, primary_key: ass_reflection.right_primary_key)
                   ManyToManyAssociation.new(left_ass, right_ass)
 
-                when :many_to_one
+                when Association::MANY_TO_ONE_TYPE
                   ManyToOneAssociation.new(child_table:  this_model_class.table_name, foreign_key: ass_reflection[:key],
                                            parent_table: associated_model_class.table_name, primary_key: ass_reflection.primary_key)
 
-                when :one_to_many
+                when Association::ONE_TO_MANY_TYPE
                   OneToManyAssociation.new(child_table:  associated_model_class.table_name, foreign_key: ass_reflection[:key],
                                            parent_table: this_model_class.table_name, primary_key: ass_reflection.primary_key)
 

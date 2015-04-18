@@ -2,7 +2,7 @@ module Dart
   class OneToManyAssociation < DirectAssociation
 
     def type
-      :one_to_many
+      ONE_TO_MANY_TYPE
     end
 
     def associated_table

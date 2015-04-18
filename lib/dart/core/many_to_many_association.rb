@@ -19,7 +19,7 @@ module Dart
     end
 
     def type
-      :many_to_many
+      MANY_TO_MANY_TYPE
     end
 
     def associated_table

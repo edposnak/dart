@@ -2,7 +2,7 @@ module Dart
   class ManyToOneAssociation < DirectAssociation
 
     def type
-      :many_to_one
+      MANY_TO_ONE_TYPE
     end
 
     def associated_table
