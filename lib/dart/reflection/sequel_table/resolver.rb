@@ -34,6 +34,10 @@ module Dart
           @table_name
         end
 
+        def default_where_sql
+          nil
+        end
+
         private
 
         class TheSchema

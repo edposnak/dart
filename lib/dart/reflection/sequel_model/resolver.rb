@@ -4,6 +4,16 @@ module Dart
       class Resolver < OrmModelResolver
         include Sequel::Sequelizer
 
+        def default_where_sql
+          # TODO consider using the more opaque .sql.split('WHERE') strategy
+          dataset = this_model_class.dataset.qualify
+          where_expr = dataset.opts[:where]
+          where_expr && dataset.literal_append('', where_expr)
+
+          # cleaner but seems less public and thus more brittle
+          # where_expr && where_expr.sql_literal(dataset)
+        end
+
         private
 
         def reflection_from(ass_name)
