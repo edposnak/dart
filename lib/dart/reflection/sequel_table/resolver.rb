@@ -20,7 +20,9 @@ module Dart
         # @return [Association]
         #
         def association_for(ass_name)
-          relation.all_associations.detect { |ass| ass.name == ass_name }
+          ass = relation.all_associations.detect { |ass| ass.name == ass_name }
+          ass.scope = {} # no scope can be determined by SQL reflection
+          ass
         end
 
         # Returns the column with the given col_name or nil if one does not exist
@@ -32,10 +34,6 @@ module Dart
 
         def table_name
           @table_name
-        end
-
-        def default_where_sql
-          nil
         end
 
         private

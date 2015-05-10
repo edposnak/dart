@@ -6,8 +6,6 @@ module Dart
   module NamingConventions
     class AbstractBaseTest < Minitest::Test
 
-      NamingConventions::AbstractBase
-
       def subject
         NamingConventions.instance
       end

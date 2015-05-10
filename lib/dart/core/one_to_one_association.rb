@@ -1,12 +1,12 @@
 module Dart
-  class ManyToOneAssociation < DirectAssociation
+  class OneToOneAssociation < DirectAssociation
 
     def type
-      MANY_TO_ONE_TYPE
+      ONE_TO_ONE_TYPE
     end
 
     def associated_table
-      parent_table
+      child_table
     end
 
     def to_one?
@@ -15,4 +15,3 @@ module Dart
 
   end
 end
-
