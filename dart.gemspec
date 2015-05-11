@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["ed.posnak@gmail.com"]
   spec.summary       = %q{database association resolver toolkit}
   spec.description   = %q{database association resolver toolkit for postgres, activemodel, sequel, etc.}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/edposnak"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
@@ -18,10 +18,10 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_dependency 'abstract_method'
+  spec.add_dependency 'abstract_method', '~> 1.2'
 
-  spec.add_development_dependency 'pg'
-  spec.add_development_dependency 'sequel'
+  spec.add_development_dependency 'pg', '~> 0.18'
+  spec.add_development_dependency 'sequel', '~> 4.20'
   spec.add_development_dependency 'bundler', '~> 1.7'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'minitest'
