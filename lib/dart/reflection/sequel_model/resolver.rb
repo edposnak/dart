@@ -62,6 +62,11 @@ module Dart
 
         def scope_for_association(ass_reflection)
           dataset = ass_reflection.associated_dataset.qualify
+
+          if block = ass_reflection[:block]
+            dataset = dataset.instance_exec(dataset, &block)
+          end
+
           opts = dataset.opts
           result = QUERY_OPTIONS.map {|cond| [cond, opts[cond] && dataset.literal_append('', opts[cond])]}
           Hash[result]
