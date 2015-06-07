@@ -11,8 +11,8 @@ module Dart
         @this_model_class = model_class
       end
 
-      def build_from_association(association)
-        self.class.new(association.model_class)
+      def to_s
+        "#{super} this_model_class=#{this_model_class}"
       end
 
       # Returns the association with the given ass_name or nil if one does not exist

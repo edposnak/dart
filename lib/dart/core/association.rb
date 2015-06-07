@@ -6,9 +6,11 @@ module Dart
     MANY_TO_ONE_TYPE = :many_to_one
     MANY_TO_MANY_TYPE = :many_to_many
 
-    # used by ORM implementations to store the associated ORM model class and association options
-    attr_accessor :model_class
+    # used by ORM implementations to store the association scope options
     attr_accessor :scope
+
+    # provides a new resolver for the target of this association
+    attr_accessor :resolver
 
     abstract_method :type, :associated_table
 

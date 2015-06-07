@@ -8,8 +8,7 @@ module Dart
       # describe #scope_hash_from
 
       def subject
-        model_class = OpenStruct.new
-        OrmModelResolver.new(model_class)
+        OrmModelResolver.new(OpenStruct.new)
       end
 
       def test_scope_hash_from_select_only

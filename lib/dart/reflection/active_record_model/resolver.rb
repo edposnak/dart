@@ -70,10 +70,9 @@ module Dart
                   fail "don't yet know how to resolve associations of type '#{ass_reflection.association_class}' model=#{ass_reflection.klass} association=#{ass_reflection.name}"
                 end
 
-          ass.model_class = ass_reflection.klass
 
           ass.scope = scope_for_association(ass_reflection)
-
+          ass.resolver = self.class.new(ass_reflection.klass)
           ass.set_name!(ass_reflection.name)
           ass
         end
@@ -102,7 +101,7 @@ module Dart
             sql_string = if scope = ass_reflection.scope
                 ass_reflection.klass.instance_exec(&scope).to_sql
               else # just use the target scope
-                model_class.new.association(ass_name).send(:target_scope).to_sql
+                this_model_class.new.association(ass_reflection.name).send(:target_scope).to_sql
               end
 
             scope_hash_from(sql_string)

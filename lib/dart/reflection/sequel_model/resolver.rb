@@ -50,10 +50,9 @@ module Dart
                   raise "don't yet know how to resolve associations of type '#{ass_reflection[:type]}' model=#{associated_model_class} association=#{ass_reflection[:name]}"
                 end
 
-          ass.model_class = associated_model_class
-
           # ass.sql = ass_reflection.associated_dataset.sql
           ass.scope = scope_for_association(ass_reflection)
+          ass.resolver = self.class.new(associated_model_class)
 
           ass.set_name!(ass_reflection[:name])
           ass

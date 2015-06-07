@@ -11,10 +11,6 @@ module Dart
           @relation   = TheSchema.instance.relation_for(table_name)
         end
 
-        def build_from_association(association)
-          self.class.new(association.associated_table)
-        end
-
         # Returns the association with the given ass_name or nil if one does not exist
         # @param [String] ass_name
         # @return [Association]
@@ -22,6 +18,7 @@ module Dart
         def association_for(ass_name)
           ass = relation.all_associations.detect { |ass| ass.name == ass_name }
           ass.scope = {} # no scope can be determined by SQL reflection
+          ass.resolver = self.class.new(ass.associated_table)
           ass
         end
 
